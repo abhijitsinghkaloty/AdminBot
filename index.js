@@ -11,10 +11,42 @@ bot.on('ready', () => {
 })
 
 bot.on('guildMemberAdd', member => {
-    const channel = member.guild.channels.cache.find(ch => ch.name === 'welcome-and-goodbye');
-    if (!channel) return;
-    channel.send(`Welcome to CS50, ${member}`);
-});
+    const welcomeChannel = member.guild.channels.cache.find(ch => ch.name.includes('welcome-and-goodbye'));
+    const rulesChannel = member.guild.channels.cache.find(ch => ch.name.includes('rules'));
+    const welcomeText = `Welcome to CS50, <@${member.user.id}>! Make sure you read ${rulesChannel}!`
+
+    if(!welcomeChannel) {
+        console.log('Could not find welcome channel, so I will make one!');
+        member.guild.createChannel('welcome-and-goodbye',{
+            type: 'text',
+            position: 0,
+            topic: 'Welcome channel for new users.',
+            permissionOverwrites: [{
+                id: member.guild.id,
+                allow: ['READ_MESSAGE_HISTORY', 'READ_MESSAGES', 'VIEW_CHANNEL'],
+                deny: ['SEND_MESSAGES']
+            }]
+        }).then(console.log('Welcome channel created!')).catch(console.error);
+    }
+
+    if(!rulesChannel) {
+        console.log('Could not find rules channel, so I will make one!');
+        member.guild.createChannel('rules',{
+            type: 'text',
+            position: 1,
+            topic: 'Rules channel for all users.',
+            permissionOverwrites: [{
+                id: member.guild.id,
+                allow: ['READ_MESSAGE_HISTORY', 'READ_MESSAGES', 'VIEW_CHANNEL'],
+                deny: ['SEND_MESSAGES']
+            }]
+        }).then(console.log('Rules channel created!')).catch(console.error);
+    }
+
+    Promise.resolve(welcomeText).then(function (welcomeText){
+        welcomeChannel.send(welcomeText)
+    })
+})
 
 bot.on('message', message => {
 
