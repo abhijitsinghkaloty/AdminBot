@@ -19,7 +19,7 @@ bot.on('ready', () => {
     bot.user.setActivity('CS50!');
 })
 
-bot.on('guildMemberAdd', guildMember =>{
+bot.on('guildMemberAdd', guildMember => {
     let welcomeRole = guildMember.guild.roles.cache.find(role => role.name === 'Member');
 
     guildMember.roles.add(welcomeRole);
