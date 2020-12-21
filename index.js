@@ -19,6 +19,12 @@ bot.on('ready', () => {
     bot.user.setActivity('CS50!');
 })
 
+bot.on('guildMemberAdd', guildMember =>{
+    let welcomeRole = guildMember.guild.roles.cache.find(role => role.name === 'Member');
+
+    guildMember.roles.add(welcomeRole);
+});
+
 bot.on('guildMemberAdd', member => {
     const welcomeChannel = member.guild.channels.cache.find(ch => ch.name.includes('welcome'));
     const rulesChannel = member.guild.channels.cache.find(ch => ch.name.includes('rules'));
