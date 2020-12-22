@@ -18,7 +18,7 @@ module.exports = {
             .addField("User status:", `${user.presence.status}`)
             .addField("Role count:", `${member.roles.cache.size - 1}`)
             .setColor('#FF4500')
-            .setFooter(`Replying to ${message.author.username}`)
+            .setFooter(`Requested by ${message.author.username}`)
             .setTimestamp()
         message.channel.send(userEmbed)
     }

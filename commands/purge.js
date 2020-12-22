@@ -16,7 +16,7 @@ module.exports = {
             message.channel.bulkDelete(messages 
         )});
         } else {
-            message.reply('you cannot use this command!')
+            message.reply('you cannot use this command!');
         }
 
     }

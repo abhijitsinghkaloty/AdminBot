@@ -17,7 +17,7 @@ module.exports = {
                 message.channel.send(argsResult);
             }
         } else {
-            message.reply('you cannot use this command!')
+            message.reply('you cannot use this command!');
         }
     }
 }
