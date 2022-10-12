@@ -16,7 +16,7 @@ for (const file of commandFiles) {
 
 bot.on('ready', () => {
     console.log('Ready!');
-    bot.user.setActivity('CS50!');
+    bot.user.setActivity('Admin');
 })
 
 bot.on('guildMemberAdd', guildMember => {
